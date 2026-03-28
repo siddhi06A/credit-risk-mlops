@@ -1,0 +1,20 @@
+FROM python:3.9-slim
+
+# Install MLflow
+RUN pip install mlflow boto3
+
+# Create directory for MLflow artifacts with proper permissions
+RUN mkdir -p /mlflow_data && chmod 777 /mlflow_data
+
+# Create an empty database file with proper permissions
+RUN touch /mlflow.db && chmod 666 /mlflow.db
+
+# Expose port
+EXPOSE 5001
+
+# Start MLflow server
+CMD mlflow server \
+    --host 0.0.0.0 \
+    --port 5001 \
+    --backend-store-uri sqlite:////mlflow.db \
+    --default-artifact-root /mlflow_data

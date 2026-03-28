@@ -1,0 +1,13 @@
+﻿services:
+  dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      - .:/workspace
+    working_dir: /workspace
+    command: tail -f /dev/null
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    environment:
+      - MLFLOW_TRACKING_URI=http://host.docker.internal:5001
