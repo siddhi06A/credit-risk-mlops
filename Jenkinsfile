@@ -13,7 +13,7 @@ pipeline {
             steps {
                 echo "Training Credit Risk Model..."
                 sh '''
-                    cd /workspace
+                    cd $WORKSPACE
                     docker-compose exec dev python src/train_v2.py
                 '''
             }
