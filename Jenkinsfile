@@ -13,8 +13,9 @@ pipeline {
             steps {
                 echo "Training Credit Risk Model..."
                 sh '''
-                    cd $WORKSPACE
-                    docker run --rm -v $WORKSPACE:/workspace -w /workspace python:3.9-slim sh -c "pip install mlflow scikit-learn numpy pandas && python src/train_v2.py"
+                    echo "Workspace path: $WORKSPACE"
+                    ls -la $WORKSPACE/src/
+                    docker run --rm -v $WORKSPACE:/workspace -w /workspace python:3.9-slim sh -c "pip install mlflow scikit-learn numpy pandas && ls -la /workspace/src/ && python /workspace/src/train_v2.py"
                 '''
             }
         }
