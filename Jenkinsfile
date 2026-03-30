@@ -13,8 +13,8 @@ pipeline {
             steps {
                 echo "Training Credit Risk Model..."
                 sh '''
-                    echo "Jenkins Workspace: $WORKSPACE"
-                    docker run --rm -v $WORKSPACE:$WORKSPACE -w $WORKSPACE python:3.9-slim sh -c "pip install mlflow scikit-learn numpy pandas && ls -la $WORKSPACE/src/ && python $WORKSPACE/src/train_v2.py"
+                    cd $WORKSPACE
+                    python3 src/train_v2.py
                 '''
             }
         }
