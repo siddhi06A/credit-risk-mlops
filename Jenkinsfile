@@ -14,7 +14,7 @@ pipeline {
                 echo "Training Credit Risk Model..."
                 sh '''
                     cd $WORKSPACE
-                    docker-compose exec dev python src/train_v2.py
+                    docker run --rm -v $WORKSPACE:/workspace -w /workspace python:3.9-slim sh -c "pip install mlflow scikit-learn numpy pandas && python src/train_v2.py"
                 '''
             }
         }
