@@ -23,7 +23,7 @@ pipeline {
             steps {
                 echo "Testing API Health..."
                 sh '''
-                    curl -f http://localhost:8000/health
+                    curl -f http://host.docker.internal:8000/health
                 '''
             }
         }
