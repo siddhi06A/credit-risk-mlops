@@ -12,14 +12,19 @@ pipeline {
         stage('Train Model') {
             steps {
                 echo "Training Credit Risk Model..."
-                bat "cd C:\\Users\\siddh\\Desktop\\credit-risk-mlops && docker-compose exec dev python src/train_v2.py"
+                sh '''
+                    cd /workspace
+                    docker-compose exec dev python src/train_v2.py
+                '''
             }
         }
         
         stage('Test API') {
             steps {
                 echo "Testing API Health..."
-                bat "curl -f http://localhost:8000/health"
+                sh '''
+                    curl -f http://localhost:8000/health
+                '''
             }
         }
     }
